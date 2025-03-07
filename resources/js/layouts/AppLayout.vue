@@ -3,12 +3,36 @@ import { Link } from '@inertiajs/vue3';
 import Logo from '@/components/Logo.vue';
 import { ArrowLeftStartOnRectangleIcon, Bars3Icon, HomeIcon, UserIcon } from '@heroicons/vue/16/solid';
 import AppLink from '@/components/AppLink.vue';
+import { provide, readonly, ref } from 'vue';
+import { toastsKey } from '@/keys.js';
+import Toast from '@/components/Toast.vue';
 
 const props = defineProps({
     user: Object,
 });
 
 const title = import.meta.env.VITE_APP_NAME;
+
+/** @type {import.vue.Ref<{ id: int, type: 'error' | 'info' | 'success', message: string }[]>} */
+const toasts = ref([]);
+
+/** @type {(type: 'error' | 'info' | 'success', message: string) => void} */
+function addToast(type, message) {
+    let latestId = 0;
+    toasts.value.forEach(({ id }) => {
+        latestId = id > latestId ? id : latestId;
+    });
+    toasts.value.push({
+        id: latestId + 1,
+        type,
+        message,
+    });
+}
+
+/** @type {(id: number) => void} */
+function removeToast(id) {
+    toasts.value = toasts.value.filter((toast) => toast.id !== id);
+}
 
 function generateAvatarPlaceholder() {
     let names = props.user?.name?.split(' ');
@@ -21,6 +45,12 @@ function generateAvatarPlaceholder() {
 
     return placeholder.toUpperCase();
 }
+
+provide(toastsKey, {
+    toasts: readonly(toasts),
+    addToast,
+    removeToast,
+});
 </script>
 
 <template>
@@ -44,7 +74,7 @@ function generateAvatarPlaceholder() {
                         </AppLink>
                     </li>
                     <li>
-                        <AppLink href="" text="Profile">
+                        <AppLink :href="route('profile')" text="Profile" :active="route().current('profile')">
                             <template #leading-icon="slot">
                                 <UserIcon  v-bind="slot" />
                             </template>
@@ -53,7 +83,14 @@ function generateAvatarPlaceholder() {
                 </ul>
             </div>
         </div>
+
         <div class="drawer-content flex flex-col min-h-svh bg-base-200">
+            <Teleport to="body">
+                <div id="toast-container"  class="toast toast-top z-20">
+                    <Toast v-for="toast in toasts" :toast="toast" :key="toast.id" @close="removeToast" />
+                </div>
+            </Teleport>
+
             <header class="navbar flex-none bg-base-100 gap-2 shadow z-10 sticky top-0">
                 <label for="drawer-toggle" class="flex-none btn btn-ghost btn-square lg:hidden">
                     <Bars3Icon class="w-6 h-6" />
@@ -70,7 +107,7 @@ function generateAvatarPlaceholder() {
                     </div>
                     <ul class="dropdown-content menu bg-base-100 shadow-lg rounded-xl border w-64">
                         <li>
-                            <AppLink href="" text="Profile">
+                            <AppLink :href="route('profile')" text="Profile">
                                 <template #leading-icon="slot">
                                     <UserIcon  v-bind="slot" />
                                 </template>

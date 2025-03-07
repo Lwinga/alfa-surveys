@@ -11,4 +11,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::get('/profile', function () {
+        return Inertia::render('Profile');
+    })->name('profile');
 });
