@@ -30,6 +30,7 @@ const toasts = inject(toastsKey);
 
 function submitUserInfo() {
     userInfoForm.put(route('user-profile-information.update'), {
+        preserveScroll: 'errors',
         onSuccess: () => {
             toasts.addToast('success', 'User information successfully updated');
         }
@@ -38,10 +39,14 @@ function submitUserInfo() {
 
 function submitChangePassword() {
     changePasswordForm.put(route('user-password.update'), {
-        preserveState: false,
+        preserveScroll: 'errors',
         onSuccess: () => {
             toasts.addToast('success', 'Password successfully updated');
+            changePasswordForm.reset();
         },
+        onFinish: () => {
+            changePasswordForm.reset();
+        }
     });
 }
 </script>
