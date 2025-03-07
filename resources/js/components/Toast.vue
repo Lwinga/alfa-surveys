@@ -7,7 +7,6 @@ const props = defineProps({
         type: Object,
         required: true,
     },
-    teleport: Boolean,
 });
 
 const emit = defineEmits(['close']);
@@ -41,17 +40,15 @@ onMounted(() => {
 </script>
 
 <template>
-    <Teleport to="#toast-container" :disabled="teleport">
-        <div class="alert cursor-default" :class="className" @mouseenter="hovered = true" @mouseleave="hovered = false">
-            <CheckCircleIcon v-if="toast.type === 'success'" class="w-6 h-6 stroke-current" />
-            <InformationCircleIcon v-if="toast.type === 'info'" class="w-6 h-6 stroke-current" />
-            <ExclamationTriangleIcon v-if="toast.type === 'error'"  class="w-6 h-6 stroke-current" />
-            <span class="flex-grow">
-                <slot>{{ toast.message }}</slot>
-            </span>
-            <button @click="$emit('close', toast.id)" type="button" class="btn btn-circle btn-sm btn-ghost">
-                <XMarkIcon  class="w-4 h-4 stroke-current" />
-            </button>
-        </div>
-    </Teleport>
+    <div class="alert cursor-default" :class="className" @mouseenter="hovered = true" @mouseleave="hovered = false">
+        <CheckCircleIcon v-if="toast.type === 'success'" class="w-6 h-6 stroke-current" />
+        <InformationCircleIcon v-if="toast.type === 'info'" class="w-6 h-6 stroke-current" />
+        <ExclamationTriangleIcon v-if="toast.type === 'error'"  class="w-6 h-6 stroke-current" />
+        <span>
+            <slot>{{ toast.message }}</slot>
+        </span>
+        <button @click="$emit('close', toast.id)" type="button" class="btn btn-circle btn-sm btn-ghost">
+            <XMarkIcon  class="w-4 h-4 stroke-current" />
+        </button>
+    </div>
 </template>

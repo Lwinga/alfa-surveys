@@ -18,6 +18,7 @@
     },
     "dependencies": {
         "@heroicons/vue": "^2.2.0",
-        "@inertiajs/vue3": "^2.0.4"
+        "@inertiajs/vue3": "^2.0.4",
+        "animate.css": "^4.1.1"
     }
 }

@@ -87,7 +87,20 @@ provide(toastsKey, {
         <div class="drawer-content flex flex-col min-h-svh bg-base-200">
             <Teleport to="body">
                 <div id="toast-container"  class="toast toast-top z-20">
-                    <Toast v-for="toast in toasts" :toast="toast" :key="toast.id" @close="removeToast" />
+                    <TransitionGroup
+                        enter-active-class="animate__animated animate__slideInRight"
+                        leave-active-class="animate__animated animate__slideOutRight absolute"
+                        move-class="transition-all duration-200"
+                    >
+                        <!-- animate-none removes a default alert animation -->
+                        <Toast
+                            v-for="toast in toasts"
+                            :toast="toast"
+                            :key="toast.id"
+                            @close="removeToast"
+                            class="animate-none [--animate-duration:200ms] [--animate-delay:0]"
+                        />
+                    </TransitionGroup>
                 </div>
             </Teleport>
 
