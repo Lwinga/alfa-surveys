@@ -45,8 +45,8 @@ function submit() {
                 :error-message="form.errors.email"
                 class="w-full"
             >
-                <template #leading-icon="{ className }">
-                    <EnvelopeIcon :class="className" />
+                <template #leading-icon="slot">
+                    <EnvelopeIcon  v-bind="slot" />
                 </template>
             </TextInput>
 
@@ -60,8 +60,8 @@ function submit() {
                 <template #label-end>
                     <Link :href="route('password.request')" class="label-text link link-primary link-hover">Forgot password?</Link>
                 </template>
-                <template #leading-icon="{ className }">
-                    <KeyIcon :class="className" />
+                <template #leading-icon="slot">
+                    <KeyIcon  v-bind="slot" />
                 </template>
             </PasswordInput>
 

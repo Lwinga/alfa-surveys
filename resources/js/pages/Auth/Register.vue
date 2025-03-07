@@ -37,8 +37,8 @@ function submit() {
                 :error-message="form.errors.name"
                 class="w-full"
             >
-                <template #leading-icon="{ className }">
-                    <UserIcon :class="className" />
+                <template #leading-icon="slot">
+                    <UserIcon  v-bind="slot" />
                 </template>
             </TextInput>
 
@@ -49,8 +49,8 @@ function submit() {
                 :error-message="form.errors.email"
                 class="w-full"
             >
-                <template #leading-icon="{ className }">
-                    <EnvelopeIcon :class="className" />
+                <template #leading-icon="slot">
+                    <EnvelopeIcon  v-bind="slot" />
                 </template>
             </TextInput>
 
@@ -61,8 +61,8 @@ function submit() {
                 :error-message="form.errors.password"
                 class="w-full"
             >
-                <template #leading-icon="{ className }">
-                    <KeyIcon :class="className" />
+                <template #leading-icon="slot">
+                    <KeyIcon  v-bind="slot" />
                 </template>
             </PasswordInput>
 
@@ -73,8 +73,8 @@ function submit() {
                 :error-message="form.errors.password_confirmation"
                 class="w-full"
             >
-                <template #leading-icon="{ className }">
-                    <KeyIcon :class="className" />
+                <template #leading-icon="slot">
+                    <KeyIcon  v-bind="slot" />
                 </template>
             </PasswordInput>
 

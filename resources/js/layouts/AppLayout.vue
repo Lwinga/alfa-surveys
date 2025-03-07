@@ -38,15 +38,15 @@ function generateAvatarPlaceholder() {
                 <ul class="menu w-full">
                     <li>
                         <AppLink :href="route('dashboard')" text="Dashboard" :active="route().current('dashboard')">
-                            <template #leading-icon="{ className }">
-                                <HomeIcon :class="className" />
+                            <template #leading-icon="slot">
+                                <HomeIcon  v-bind="slot" />
                             </template>
                         </AppLink>
                     </li>
                     <li>
                         <AppLink href="" text="Profile">
-                            <template #leading-icon="{ className }">
-                                <UserIcon :class="className" />
+                            <template #leading-icon="slot">
+                                <UserIcon  v-bind="slot" />
                             </template>
                         </AppLink>
                     </li>
@@ -71,15 +71,15 @@ function generateAvatarPlaceholder() {
                     <ul class="dropdown-content menu bg-base-100 shadow-lg rounded-xl border w-64">
                         <li>
                             <AppLink href="" text="Profile">
-                                <template #leading-icon="{ className }">
-                                    <UserIcon :class="className" />
+                                <template #leading-icon="slot">
+                                    <UserIcon  v-bind="slot" />
                                 </template>
                             </AppLink>
                         </li>
                         <li>
                             <AppLink :href="route('logout')" method="post" as="button" text="Logout">
-                                <template #leading-icon="{ className }">
-                                    <ArrowLeftStartOnRectangleIcon :class="className" />
+                                <template #leading-icon="slot">
+                                    <ArrowLeftStartOnRectangleIcon  v-bind="slot" />
                                 </template>
                             </AppLink>
                         </li>

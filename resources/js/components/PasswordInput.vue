@@ -28,8 +28,8 @@ const inputType = computed(() => passwordVisible.value ? 'text' : 'password');
             <slot name="label-end"></slot>
         </template>
         
-        <template #leading-icon="{ className }">
-            <slot name="leading-icon" :className></slot>
+        <template #leading-icon="slot">
+            <slot name="leading-icon" v-bind="slot"></slot>
         </template>
 
         <input v-model="model" :type="inputType" :placeholder="placeholder ?? labelText" :id class="grow">

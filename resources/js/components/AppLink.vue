@@ -10,7 +10,7 @@ defineProps({
 <template>
     <Link class="flex items-center gap-2" :class="{ 'active': active }">
         <div class="flex-none">
-            <slot name="leading-icon" class-name="w-4 h-4 fill-current"></slot>
+            <slot name="leading-icon" class="w-4 h-4 fill-current"></slot>
         </div>
         <div class="flex-1">
             <slot>{{ text }}</slot>

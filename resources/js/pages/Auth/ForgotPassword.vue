@@ -38,8 +38,8 @@ function submit() {
                 :error-message="form.errors.email"
                 class="w-full"
             >
-                <template #leading-icon="{ className }">
-                    <EnvelopeIcon :class="className" />
+                <template #leading-icon="slot">
+                    <EnvelopeIcon v-bind="slot" />
                 </template>
             </TextInput>
 

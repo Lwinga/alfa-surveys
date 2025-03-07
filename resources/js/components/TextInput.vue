@@ -22,7 +22,7 @@ const model = defineModel();
             <slot name="label-end"></slot>
         </div>
         <label class="input input-bordered flex items-center gap-4">
-            <slot name="leading-icon" class-name="w-5 h-5 fill-slate-500"></slot>
+            <slot name="leading-icon" class="w-5 h-5 fill-slate-500"></slot>
             <slot>
                 <input v-model="model" type="text" :placeholder="placeholder ?? labelText" :id class="grow">
             </slot>
