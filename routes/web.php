@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfilePhotoController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -15,4 +16,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', function () {
         return Inertia::render('Profile');
     })->name('profile');
+
+    Route::post('/user/profile-photo', [ProfilePhotoController::class, 'store'])
+        ->name('user.photo');
+
+    Route::delete('/user/profile-photo', [ProfilePhotoController::class, 'destroy']);
 });

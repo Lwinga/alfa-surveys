@@ -5,6 +5,7 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import './bootstrap';
 import '../css/app.css';
 import 'animate.css';
+import 'vue-advanced-cropper/dist/style.css';
 
 createInertiaApp({
     title: title => `${title} - ${import.meta.env.VITE_APP_NAME}`,

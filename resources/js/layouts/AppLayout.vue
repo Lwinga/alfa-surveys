@@ -6,6 +6,7 @@ import AppLink from '@/components/AppLink.vue';
 import { provide, readonly, ref } from 'vue';
 import { toastsKey } from '@/keys.js';
 import Toast from '@/components/Toast.vue';
+import { generateAvatarPlaceholder } from '@/lib/utils';
 
 const props = defineProps({
     user: Object,
@@ -32,18 +33,6 @@ function addToast(type, message) {
 /** @type {(id: number) => void} */
 function removeToast(id) {
     toasts.value = toasts.value.filter((toast) => toast.id !== id);
-}
-
-function generateAvatarPlaceholder() {
-    let names = props.user?.name?.split(' ');
-    let placeholder = '';
-
-    // A placeholder should have a maximum of 2 characters
-    for (let i = 0; i < names?.length && i < 2; i++) {
-        placeholder += names[i].charAt(0);
-    }
-
-    return placeholder.toUpperCase();
 }
 
 provide(toastsKey, {
@@ -113,9 +102,10 @@ provide(toastsKey, {
                 </div>
                 <div class="flex-none">{{ user?.name }}</div>
                 <div class="flex-none dropdown dropdown-end">
-                    <div tabindex="0" role="button" class="avatar placeholder btn btn-ghost btn-circle">
-                        <div class="w-12 rounded-full bg-base-300 text-base-content">
-                            <h3>{{ generateAvatarPlaceholder() }}</h3>
+                    <div tabindex="0" role="button" class="avatar btn btn-ghost btn-circle" :class="{'placeholder': !user.photo_path}">
+                        <div class="w-12 rounded-full bg-neutral/60 text-neutral-content">
+                            <img v-if="user.photo_path" :src="user.photo_path" alt="Profile photo">
+                            <h3 v-else>{{ generateAvatarPlaceholder(user.name) }}</h3>
                         </div>
                     </div>
                     <ul class="dropdown-content menu bg-base-100 shadow-lg rounded-xl border w-64">
