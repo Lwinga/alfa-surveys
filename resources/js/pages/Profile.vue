@@ -11,6 +11,7 @@ import FileDialog from '@/components/FileDialog.vue';
 
 const props = defineProps({
     user: Object,
+    verified: Boolean,
 });
 
 defineOptions({
@@ -35,6 +36,10 @@ const changePasswordForm = useForm({
 const toasts = inject(toastsKey);
 
 const fileDialogVisible = ref(false);
+
+if (props.verified) {
+    toasts.addToast('success', 'Email successfully verified');
+}
 
 function uploadPhoto(photo) {
     photoForm.photo = photo;

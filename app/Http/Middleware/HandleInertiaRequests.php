@@ -38,6 +38,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), array_filter([
             'user' => $request->user(),
             'status' => $request->session()->get('status'),
+            'verified' => $request->session()->get('verified'),
         ]));
     }
 }
